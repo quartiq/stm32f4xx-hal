@@ -612,7 +612,7 @@ macro_rules! adc {
                 /// Enables the ADC clock, resets the peripheral (optionally), runs calibration and applies the supplied config
                 /// # Arguments
                 /// * `reset` - should a reset be performed. This is provided because on some devices multiple ADCs share the same common reset
-                pub fn $constructor_fn_name(adc: stm32::$adc_type, reset: bool, config: config::AdcConfig) -> Adc<stm32::$adc_type> {
+                pub fn $constructor_fn_name(adc: stm32::$adc_type, reset: bool, vdda_mv: u32, config: config::AdcConfig) -> Adc<stm32::$adc_type> {
                     unsafe {
                         let rcc = &(*stm32::RCC::ptr());
                         //Enable the common clock
@@ -627,7 +627,7 @@ macro_rules! adc {
                     let mut s = Self {
                         config,
                         adc_reg: adc,
-                        calibrated_vdda: VDDA_CALIB,
+                        calibrated_vdda: vdda_mv,
                         max_sample: 0,
                     };
 
@@ -636,7 +636,6 @@ macro_rules! adc {
                     s.apply_config(config);
 
                     s.enable();
-                    s.calibrate();
 
                     s
                 }
