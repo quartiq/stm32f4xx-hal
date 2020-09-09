@@ -31,6 +31,7 @@ cortex-m-rt = "0.6.10"
 nb = "0.1.2"
 rand_core = "0.5.1"
 stm32f4 = "0.11"
+synopsys-usb-otg = { version = "0.2.0", features = ["cortex-m"], optional = true }
 sdio-host = { version = "0.5.0", optional = true }
 stable_deref_trait = { version = "1.2.0", default-features = false }
 
@@ -57,17 +58,9 @@ arrayvec = { version = "0.5.1", default-features = false }
 panic-halt = "0.2.0"
 ssd1306 = "0.3.1"
 embedded-graphics = "0.6.2"
+usb-device = "0.2.5"
 usbd-serial = "0.1.0"
 micromath = "1.0.0"
-
-[dependencies.synopsys-usb-otg]
-git = "https://github.com/quartiq/synopsys-usb-otg"
-features = ["cortex-m"]
-optional = true
-
-[dependencies.usb-device]
-git = "https://github.com/ryan-summers/usb-device"
-branch = "rs/periodic-poll-bug/race-condition-fix"
 
 [features]
 device-selected = []
